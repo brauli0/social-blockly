@@ -1,0 +1,29 @@
+<div class="row div-shadow padding-blockly">
+  <div id="blockly-div" class="col-md-8 blockly-div"></div>
+  <div class="col-md-4 padding-code">
+    <div class="btn-group btn-group-toggle full-width" data-toggle="buttons">
+      <button class="btn btn-secondary active" (click)="showPy()">
+        <input type="radio">Python
+      </button>
+      <button class="btn btn-secondary" (click)="showJs()">
+        <input type="radio" checked>Javascript
+      </button>
+    </div>
+    <pre class="code"><code [highlight]="showcode"></code></pre>
+    <div class="row">
+      <div class="col-md-6">
+        <span>{{ 'BLOCKLY.output' | translate }}:</span>
+      </div>
+      <div class="col-md-6 text-align-right">
+        <span title="{{ 'BLOCKLY.clear-output' | translate }}" class="clear-output" (click)="clearOutput()">{{ 'BLOCKLY.clear-output' | translate }}</span>
+      </div>
+    </div>
+    <pre id="output-pre" class="output"><code id="outputInHTML"></code></pre>
+    <button title="{{ 'BLOCKLY.undo' | translate }}" class="btn btn-warning undo-button" (click)="undo(false)"><i class="fa fa-undo"></i></button>
+    <button title="{{ 'BLOCKLY.redo' | translate }}" class="btn btn-success redo-button" (click)="undo(true)"><i class="fa fa-repeat"></i></button>
+    <button title="{{ 'BLOCKLY.clear-workspace' | translate }}" class="btn btn-danger clear-button" (click)="clearWorkspace()"><i class="fa fa-eraser"></i></button>
+    <button *ngIf="showSaveButton" title="{{ 'BLOCKLY.save-program' | translate }}" class="btn btn-success save-button" (click)="save()"><i class="fa fa-floppy-o"></i></button>
+    <span *ngIf="showSaveButton && !saved" class="not-saved">* NOT SAVED</span>
+    <button title="{{ 'BLOCKLY.execute' | translate }}" class="run-button" (click)="executeCode()"><i class="fa fa-play"></i></button>
+  </div>
+</div>

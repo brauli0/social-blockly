@@ -1,0 +1,54 @@
+h1 {
+    margin-top: 1%;
+    text-align: center;
+    color: #055005;
+}
+
+.member-since {
+    font-size: 12px;
+    text-align: center;
+    margin-bottom: 4%;
+}
+
+.row {
+    margin-bottom: 3%;
+}
+
+.role-color {
+    color: #26801b;
+}
+
+.color-green-modal {
+    background-color: #d8fbd7;
+}
+
+.profile-div {
+    text-align: right;
+    min-width: 500px;
+}
+
+.text-align-left {
+    text-align: left;
+}
+
+.margin-auto {
+    margin: auto;
+}
+
+.margin-button {
+    margin-right: 1%;
+}
+
+.attribute-title {
+    color: green;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.cancel-btn {
+    margin-right: 5px;
+}
+
+.custom-input {
+    height: 32px;
+}

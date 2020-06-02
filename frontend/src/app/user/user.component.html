@@ -1,0 +1,74 @@
+<div>
+  <div *ngIf="!userexists" class="no-user-div">
+    <span class="no-user">This user doesn't exist. Go to <a routerLink="/explore">explore</a></span>
+  </div>
+  <div *ngIf="userexists" class="row">
+    <div class="offset-1 col-md-10">
+      <div class="user-info">
+        <div class="row">
+          <div class="col-md-4 align-left">
+            <button routerLink="/explore" title="{{ 'COMMON.go-back' | translate }}" class="btn btn-success go-back-button"><i class="fa fa-arrow-left icon-20"></i> {{ 'APP.explore' | translate }}</button>
+          </div>
+          <div class="col-md-8 title-div">
+            <span class="title">{{ 'USER.user' | translate }}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="offset-3 col-md-6">
+            <div *ngIf="user != undefined" class="div-shadow">
+              <div class="top-div">
+                <span class="role-color"><strong>{{user.role}}</strong></span><br>
+                <span>{{ 'PROFILE.member-since' | translate }}: <strong>{{user.signUpDate}}</strong></span><br>
+              </div>
+              <span><strong>{{user.firstName}} {{user.lastName}} (@{{user.userName}}) - {{user.email}}</strong></span><br>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <span class="title-section">{{ 'USER.shared-programs' | translate }}</span>
+          <div *ngIf="sharedPrograms.length == 0" class="no-data">
+            <span>Nothing to show.</span>
+          </div>
+          <div *ngIf="sharedPrograms.length != 0" class="max-height padding-5">
+            <div *ngFor="let program of sharedPrograms">
+              <div routerLink="/program/{{program.id}}" class="div-shadow-custom overflow cursor-pointer">
+                <span><strong>{{ 'USER.program-name' | translate }}</strong>: {{program.programName}}</span><br>
+                <span><strong>{{ 'USER.program-desc' | translate }}</strong>: {{program.programDesc}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <span class="title-section">{{ 'USER.user-public-programs' | translate }}</span>
+          <div *ngIf="programs.length == 0" class="no-data">
+            <span>Nothing to show.</span>
+          </div>
+          <div *ngIf="programs.length != 0" class="max-height padding-5">
+            <div *ngFor="let program of programs">
+              <div routerLink="/program/{{program.id}}" class="div-shadow-custom overflow cursor-pointer">
+                <span><strong>{{ 'USER.program-name' | translate }}</strong>: {{program.programName}}</span><br>
+                <span><strong>{{ 'USER.program-desc' | translate }}</strong>: {{program.programDesc}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <span class="title-section">{{ 'USER.common-groups' | translate }}</span>
+          <div *ngIf="groups.length == 0" class="no-data">
+            <span>Nothing to show.</span>
+          </div>
+          <div *ngIf="groups.length != 0" class="max-height padding-5">
+            <div *ngFor="let group of groups">
+              <div routerLink="/group/{{group.id}}" class="div-shadow-custom overflow cursor-pointer">
+                <span><strong>{{ 'USER.group-name' | translate }}</strong>: {{group.groupName}}</span><br>
+                <span><strong>{{ 'USER.created' | translate }}</strong>: {{group.creationDate}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

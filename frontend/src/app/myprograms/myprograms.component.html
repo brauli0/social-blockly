@@ -1,0 +1,127 @@
+<div class="row">
+  <div class="offset-md-2 col-md-8">
+    <h2>{{ 'PROGRAMS.my-programs' | translate }}</h2>
+    <div *ngIf="myprograms.length == 0" class="no-programs-div">
+      <span class="no-programs">{{ 'PROGRAMS.no-programs' | translate }}</span>
+    </div>
+    <div *ngFor="let program of pageShowingPrograms">
+      <div class="row">
+        <div routerLink="/program/{{program.id}}" class="col-md-11 program-div div-shadow cursor-pointer">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-12">
+                  <span class="attribute-title">{{ 'PROGRAMS.name' | translate }}</span><br>
+                  <span class="attribute"><strong>{{program.programName}}</strong></span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <span class="attribute-title">{{ 'PROGRAMS.description' | translate }}</span><br>
+                  <span class="attribute">{{program.programDesc}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 align-right">
+              <span class="attribute-title">{{ 'PROGRAMS.creation-date' | translate }}</span><br>
+              <span class="attribute-title">{{ 'PROGRAMS.last-update' | translate }}</span><br>
+              <span class="attribute-title">{{ 'PROGRAMS.visibility' | translate }}</span>
+            </div>
+            <div class="col-md-3">
+              <span class="attribute-date">{{program.creationDate}}</span><br>
+              <span class="attribute-date">{{program.updateDate}}</span><br>
+              <span class="attribute-date private" *ngIf="program.visibility == 'Private'">{{ 'PROGRAMS.private-program' | translate }}</span>
+              <span class="attribute-date shared" *ngIf="program.visibility == 'Shared'">{{ 'PROGRAMS.shared-program' | translate }}</span>
+              <span class="attribute-date public" *ngIf="program.visibility == 'Public'">{{ 'PROGRAMS.public-program' | translate }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-1 margin-top-10">
+          <button (click)="changeModal(program.programName, program.programDesc, program.privateProgram)" data-toggle="modal" [attr.data-target]="'#editProgram' + program.id" title="{{ 'PROGRAMS.edit-uppercase' | translate }}" class="btn btn-warning button-edit"><i class="fa fa-pencil"></i></button>
+          <!-- MODAL -->
+          <div class="modal fade" id="editProgram{{program.id}}">
+            <div class="modal-dialog">
+              <div class="modal-content color-green-modal">
+                <div class="modal-header">
+                  <h4 class="modal-title">{{ 'PROGRAMS.edit-program' | translate }}</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+          
+                  <span class="color-green">{{ 'PROGRAMS.program-name' | translate }}</span>
+                  <input type="text" class="form-control" [formControl]="programNameInput">
+                  <br>
+                  <span class="color-green">{{ 'PROGRAMS.program-desc' | translate }}</span>
+                  <textarea rows="4" class="form-control" [formControl]="programDescInput"></textarea>
+                  <br>
+                  <div class="edit-buttons">
+                    <button type="button" class="btn btn-danger margin-right-button" data-dismiss="modal">{{ 'COMMON.cancel' | translate }}</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal" (click)="edit(program.id, program.programName, program.programDesc, program.code, program.privateProgram)">{{ 'COMMON.save' | translate }}</button>
+                  </div>
+          
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button routerLink="/program/permissions/{{program.id}}" class="btn btn-info button-permissions" title="{{ 'PROGRAMSchange-permissions' | translate }}"><i class="fa fa-lock"></i></button>
+
+          <button data-toggle="modal" [attr.data-target]="'#deleteProgram' + program.id" title="{{ 'PROGRAMS.delete-program-uppercase' | translate }}" class="btn btn-danger button-delete"><i class="fa fa-trash"></i></button>
+          <!-- MODAL -->
+          <div class="modal fade" id="deleteProgram{{program.id}}">
+            <div class="modal-dialog">
+              <div class="modal-content color-green-modal">
+                <div class="modal-header">
+                  <h4 class="modal-title">{{ 'PROGRAMS.delete-program' | translate }}</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+          
+                  <span>{{ 'PROGRAMS.confirm-delete' | translate }} "{{program.programName}}"?</span>
+          
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">{{ 'COMMON.cancel' | translate }}</button>
+                  <button type="button" (click)="delete(program.id)" class="btn btn-success" data-dismiss="modal">{{ 'PROGRAMS.delete' | translate }}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- PAGINATION -->
+    <div *ngIf="myprograms.length != 0" class="pagination-div">
+      <span>{{ 'COMMON.showing' | translate }} <strong>{{pageConfig.firstShown}}</strong> {{ 'COMMON.to' | translate }} <strong>{{pageConfig.lastShown}}</strong> {{ 'COMMON.of' | translate }} <strong>{{pageConfig.size}}</strong></span><br>
+      <button (click)="previousPage()" class="btn btn-success left-arrow"><i class="fa fa-caret-left"></i></button>
+      <button (click)="nextPage()" class="btn btn-success right-arrow"><i class="fa fa-caret-right"></i></button>
+    </div>
+    <!-- ---------- -->
+  </div>
+</div>
+
+<button (click)="changeModal('', '')" data-toggle="modal" data-target="#newProgram" class="new-button" title="CREATE NEW PROGRAM"><i class="fa fa-plus"></i></button>
+<!-- MODAL -->
+<div class="modal fade" id="newProgram">
+  <div class="modal-dialog">
+    <div class="modal-content color-green-modal">
+      <div class="modal-header">
+        <h4 class="modal-title">{{ 'PROGRAMS.create-new-program' | translate }}</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+
+        <span>{{ 'PROGRAMS.program-name' | translate }}</span>
+        <input type="text" class="form-control" placeholder="New program" [formControl]="programNameInput">
+        <span>{{ 'PROGRAMS.program-desc' | translate }}</span>
+        <textarea rows="4" class="form-control" [formControl]="programDescInput"></textarea>
+        <br>
+        <div class="edit-buttons">
+          <button type="button" class="btn btn-danger margin-right-button" data-dismiss="modal">{{ 'COMMON.cancel' | translate }}</button>
+          <button type="button" class="btn btn-success" data-dismiss="modal" (click)="save()">{{ 'COMMON.save' | translate }}</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

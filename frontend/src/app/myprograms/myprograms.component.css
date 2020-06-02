@@ -1,0 +1,141 @@
+h2 {
+    margin-top: 1%;
+    text-align: center;
+    color: #055005;
+}
+
+.program-div {
+    margin-top: 10px;
+}
+
+.program-div:hover {
+    background-color: #b1deb1;
+}
+
+.margin-top-10 {
+    margin-top: 10px;
+}
+
+.button-edit {
+    color: white;
+    font-size: 18px;
+    padding: 2px 8px;
+}
+
+.color-green-modal {
+    background-color: #d8fbd7;
+}
+
+.no-programs-div {
+    text-align: center;
+    margin-top: 20%;
+}
+
+.edit-buttons {
+    text-align: right;
+}
+
+.margin-right-button {
+    margin-right: 10px;
+}
+
+.no-programs {
+    font-size: 17px;
+    color: #26801b;
+    font-weight: bold;
+}
+
+.button-delete {
+    color: white;
+    font-size: 18px;
+    padding: 2px 8px;
+    margin-top: 5px;
+}
+
+.button-permissions {
+    color: white;
+    font-size: 18px;
+    padding: 2px 10px;
+    margin-top: 5px;
+}
+
+.attribute-title {
+    color: green;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.attribute {
+    font-size: 15px;
+}
+
+.attribute-date {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.new-button {
+    border: none;
+    border-radius: 50%;
+    background-color: #26801b;
+    padding: 11px 27px;
+    font-size: 40px;
+    display: inline-block;
+    color: #fff;
+    box-shadow: 1px 3px 8px 2px #023c06;
+    transition: none;
+    position: fixed;
+    bottom: 40px;
+    right: 90px;
+}
+
+.new-button:hover {
+    background-color: #2f9c21;
+}
+
+.new-button:active {
+    background-color: #1e6615;
+    box-shadow: 1px 3px 8px 5px #023c06;
+}
+
+.color-green {
+    color: #055005;
+}
+
+.private {
+    color: red;
+}
+
+.public {
+    color: green;
+}
+
+.shared {
+    color: blue;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.pagination-div {
+    text-align: center;
+    margin: 5% 0 5% 0;
+    color: #7f6868;
+    font-size: 14px;
+}
+
+.left-arrow {
+    padding: 0px 11px;
+    font-size: 20px;
+    background-color: #9cce9b;
+    margin-right: 20px;
+    margin-top: 7px;
+}
+
+.right-arrow {
+    padding: 0px 11px;
+    font-size: 20px;
+    background-color: #9cce9b;
+    margin-top: 7px;
+}

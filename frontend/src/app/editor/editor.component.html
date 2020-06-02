@@ -1,0 +1,171 @@
+<div>
+  <div class="row">
+    <div class="offset-md-1 col-md-10">
+      <button *ngIf="gotanswer && showReturnToProgramsButton" routerLink="/myprograms" title="{{ 'COMMON.go-back' | translate }}" class="btn btn-success go-back-button"><i class="fa fa-arrow-left icon-20"></i> {{ 'EDITOR.my-programs-capital' | translate }}</button>
+      <div *ngIf="gotanswer" class="row attributes-div">
+        <span class="owner">{{ 'EDITOR.owner' | translate }}: <strong>{{program.userName}}</strong></span>
+        <div class="col-md-6 name-div">
+          <span class="attribute-title">{{ 'EDITOR.name' | translate }}</span><br>
+          <span>{{program.programName}}</span>
+        </div>
+        <div class="col-md-6">
+          <span class="attribute-title">{{ 'EDITOR.description' | translate }}</span><br>
+          <span>{{program.programDesc}}</span>
+        </div>
+        <i title="{{ 'PROGRAMS.private-program' | translate }}" *ngIf="program.privateProgram" class="fa fa-lock private-lock"></i>
+        <i title="{{ 'PROGRAMS.public-program' | translate }}" *ngIf="!program.privateProgram" class="fa fa-unlock-alt public-lock"></i>
+      </div>
+      <app-blockly *ngIf="gotanswer"></app-blockly>
+
+      <div *ngIf="gotanswer" class="row">
+        <div class="offset-md-3 col-md-6">
+          <div class="rating-div">
+            <span class="title">{{ 'EDITOR.ratings' | translate }}</span>
+            <div class="row rating-show div-shadow">
+              <div class="col-md-9">
+                <div class="progress custom-bar">
+                  <div class="progress-bar bg-success bar-text" role="progressbar" [style.width.%]="averageRatingBar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="10"><strong>{{averageRating}}</strong></div>
+                </div>
+              </div>
+              <div class="col-md-3 align-right">
+                <span class="votes">{{ 'EDITOR.votes' | translate }}: <strong>{{nVotes}}</strong></span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <span>{{ 'EDITOR.my-punctuation' | translate }}: <strong>{{inputRating}}</strong></span>
+              </div>
+              <div class="col-md-4">
+                <input *ngIf="!iVoted" (input)="inputRangeChange($event.target.value)" type="range" min="0" max="10" class="custom-range more-custom">
+                <button *ngIf="iVoted" (click)="deleteRating()" title="{{ 'EDITOR.delete-uppercase' | translate }}" class="btn btn-danger">{{ 'EDITOR.delete' | translate }}</button>
+              </div>
+              <div class="col-md-4 align-right">
+                <button *ngIf="!iVoted" (click)="sendRating()" title="{{ 'EDITOR.send-uppercase' | translate }}" class="btn btn-success">{{ 'EDITOR.send' | translate }}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr *ngIf="gotanswer">
+      <div *ngIf="gotanswer" class="row">
+        <div class="offset-md-2 col-md-8">
+          <div class="comment-div">
+            <span class="title">{{ 'EDITOR.comments' | translate }}</span>
+            <div class="new-comment">
+              <textarea rows="3" placeholder="{{ 'EDITOR.leave-comment' | translate }}" class="form-control" [formControl]="newCommentInput"></textarea>
+              <div class="send-button-div">
+                <button (click)="createComment()" title="{{ 'EDITOR.send-comment' | translate }}" class="btn btn-success">{{ 'EDITOR.send' | translate }}</button>
+              </div>
+            </div>
+            <div *ngIf="comments.length == 0" class="no-comments-text">
+              <span>{{ 'EDITOR.no-comments-yet' | translate }}</span>
+            </div>
+            <div *ngFor="let comment of comments">
+              <div class="comment div-shadow">
+                <div class="comment-author cursor-pointer" routerLink="/user/{{comment.userName}}">
+                  <span>@{{comment.userName}}  -  </span>
+                  <span class="comment-date"><strong>{{comment.commentDate}}</strong></span>
+                </div>
+                <div class="comment-text"><span>{{comment.commentText}}</span></div>
+                <div class="align-right">
+                  <button data-toggle="modal" [attr.data-target]="'#replyComment' + comment.id" title="{{ 'EDITOR.reply-uppercase' | translate }}" class="btn btn-info btn-reply"><i class="fa fa-reply"></i> {{ 'EDITOR.reply' | translate }}</button>
+                  <button *ngIf="myUserId == comment.userId" title="{{ 'EDITOR.delete-comment' | translate }}" data-toggle="modal" [attr.data-target]="'#deleteComment' + comment.id" class="btn btn-danger btn-delete"><i class="fa fa-trash-o"></i></button>
+                </div>
+
+                <!-- MODAL REPLY COMMENT -->
+                <div class="modal fade" id="replyComment{{comment.id}}">
+                    <div class="modal-dialog">
+                        <div class="modal-content color-green-modal">
+                            <div class="modal-header">
+                                <h4 class="modal-title">{{ 'EDITOR.reply' | translate }}</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="comment-author"><span>@{{comment.userName}}</span></div>
+                                <div class="comment-text"><span>{{comment.commentText}}</span></div>
+                                <div class="comment-date"><span><strong>{{comment.commentDate}}</strong></span></div>
+                                <br>
+                                <textarea rows="3" class="form-control" placeholder="Your reply" [formControl]="newReplyInput"></textarea>
+                                <br>
+                                <div class="edit-buttons">
+                                    <button type="button" class="btn btn-danger margin-right-button" data-dismiss="modal">{{ 'COMMON.cancel' | translate }}</button>
+                                    <button type="button" class="btn btn-success" data-dismiss="modal" (click)="createReply(comment.id)">{{ 'EDITOR.send' | translate }}</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MODAL CONFIRM DELETE COMMENT -->
+                <div class="modal fade" id="deleteComment{{comment.id}}">
+                  <div class="modal-dialog">
+                      <div class="modal-content color-green-modal">
+                          <div class="modal-header">
+                              <h4 class="modal-title">{{ 'EDITOR.delete-comment-lowercase' | translate }}</h4>
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          </div>
+                          <div class="modal-body">
+
+                              <span>{{ 'EDITOR.confirm-delete' | translate }}</span><br><br>
+                              <span class="comment-text">{{comment.commentText}}</span>
+
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-danger" data-dismiss="modal">{{ 'COMMON.cancel' | translate }}</button>
+                              <button type="button" (click)="deleteComment(comment.id)" class="btn btn-success" data-dismiss="modal">{{ 'EDITOR.delete' | translate }}</button>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+
+                <span *ngIf="comment.replies.length != 0" class="replies-title">{{ 'EDITOR.replies' | translate }}</span>
+                <div *ngIf="comment.replies.length != 0" class="reply-div div-shadow">
+                  <div *ngFor="let reply of comment.replies">
+                    <div class="reply">
+                      <div class="comment-author cursor-pointer" routerLink="/user/{{reply.userName}}">
+                        <span>@{{reply.userName}}  -  </span>
+                        <span class="comment-date"><strong>{{reply.commentDate}}</strong></span>
+                      </div>
+                      <div class="comment-text"><span>{{reply.commentText}}</span></div>
+                      <div class="align-right">
+                        <button *ngIf="myUserId == reply.userId" title="{{ 'EDITOR.delete-reply' | translate }}" data-toggle="modal" [attr.data-target]="'#deleteReply' + reply.id" class="btn btn-danger btn-delete"><i class="fa fa-trash-o"></i></button>
+                      </div>
+                      <!-- MODAL CONFIRM DELETE REPLY -->
+                      <div class="modal fade" id="deleteReply{{reply.id}}">
+                        <div class="modal-dialog">
+                            <div class="modal-content color-green-modal">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">{{ 'EDITOR.delete-reply-lowercase' | translate }}</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <div class="modal-body">
+    
+                                    <span>{{ 'EDITOR.confirm-delete-reply' | translate }}</span><br><br>
+                                    <span class="comment-text">{{reply.commentText}}</span>
+    
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">{{ 'COMMON.cancel' | translate }}</button>
+                                    <button type="button" (click)="deleteComment(reply.id)" class="btn btn-success" data-dismiss="modal">{{ 'EDITOR.delete' | translate }}</button>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!gotanswer" class="no-program-div">
+    <span class="no-program">{{ 'EDITOR.no-program' | translate }}<a routerLink="/myprograms">{{ 'EDITOR.my-programs' | translate }}</a>.</span>
+  </div>
+</div>

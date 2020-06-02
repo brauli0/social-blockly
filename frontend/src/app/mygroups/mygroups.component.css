@@ -1,0 +1,93 @@
+h2 {
+    margin-top: 1%;
+    text-align: center;
+    color: #055005;
+}
+
+.no-groups-div {
+    text-align: center;
+    margin-top: 20%;
+}
+
+.no-groups {
+    font-size: 17px;
+    color: #26801b;
+    font-weight: bold;
+}
+
+.group-div {
+    margin-top: 15px;
+}
+
+.group-div:hover {
+    background-color: #b1deb1;
+}
+
+.attribute-title {
+    color: green;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.attribute {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.color-green-modal {
+    background-color: #d8fbd7;
+}
+
+.modal-buttons {
+    text-align: right;
+}
+
+.margin-right-button {
+    margin-right: 10px;
+}
+
+.new-button {
+    border: none;
+    border-radius: 50%;
+    background-color: #26801b;
+    padding: 11px 27px;
+    font-size: 40px;
+    display: inline-block;
+    color: #fff;
+    box-shadow: 1px 3px 8px 2px #023c06;
+    transition: none;
+    position: fixed;
+    bottom: 40px;
+    right: 90px;
+}
+
+.new-button:hover {
+    background-color: #2f9c21;
+}
+
+.new-button:active {
+    background-color: #1e6615;
+    box-shadow: 1px 3px 8px 5px #023c06;
+}
+
+.pagination-div {
+    text-align: center;
+    margin: 5% 0 5% 0;
+    color: #7f6868;
+    font-size: 14px;
+}
+
+.left-arrow {
+    padding: 0px 11px;
+    font-size: 20px;
+    background-color: #9cce9b;
+    margin-right: 20px;
+    margin-top: 7px;
+}
+
+.right-arrow {
+    padding: 0px 11px;
+    font-size: 20px;
+    background-color: #9cce9b;
+    margin-top: 7px;
+}

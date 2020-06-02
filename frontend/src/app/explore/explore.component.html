@@ -1,0 +1,155 @@
+<div class="row">
+  <div class="offset-md-1 col-md-10">
+    <div class="title-div">
+      <span>Explore</span>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="section-title-shared">
+          <span>{{ 'EXPLORE.shared-programs' | translate }}</span>
+        </div>
+        <div *ngIf="!sharedProgramsReceived" class="no-data">
+          <span>Nothing to show.</span>
+        </div>
+        <div *ngIf="sharedProgramsReceived" class="max-height padding-5">
+          <div *ngFor="let program of sharedPrograms">
+            <div routerLink="/program/{{program.id}}" class="div-shadow-custom overflow cursor-pointer">
+              <span><strong>{{ 'EXPLORE.owner-lowercase' | translate }}</strong>: <strong>@{{program.userName}}</strong></span><br>
+              <span><strong>{{ 'USER.program-name' | translate }}</strong>: {{program.programName}}</span><br>
+              <span><strong>{{ 'USER.program-desc' | translate }}</strong>: {{program.programDesc}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="section-title">
+          <span>{{ 'EXPLORE.search-programs' | translate }}</span>
+        </div>
+        <div class="cool-border max-height">
+          <form class="form-inline">
+            <i class="fa fa-search" aria-hidden="true"></i>
+            <input class="form-control form-control-sm ml-2 w-75" type="text" placeholder="Search"
+              aria-label="Search" (input)="searchPrograms($event.target.value)">
+          </form>
+          <div *ngFor="let program of foundPrograms" class="member">
+            <div class="row">
+              <div class="col-md-10 program-div overflow">
+                <span><strong>{{program.programName}}</strong></span><br>
+                <span>{{program.programDesc}}</span>
+              </div>
+              <div class="col-md-2 align-right">
+                <button title="{{ 'EXPLORE.program-info' | translate }}" (click)="getOwner(program.userId)" data-toggle="modal" [attr.data-target]="'#viewProgram' + program.id" class="btn btn-info user-button"><i class="fa fa-info-circle"></i></button>
+              </div>
+              <!-- MODAL PROGRAM INFO -->
+              <div class="modal fade" id="viewProgram{{program.id}}">
+                  <div class="modal-dialog">
+                      <div class="modal-content color-green-modal">
+                          <div class="modal-header">
+                              <h4 class="modal-title">{{ 'EXPLORE.program-info' | translate }}</h4>
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          </div>
+                          <div class="modal-body">
+
+                            <div class="row">
+                              <div class="col-md-6">
+                                <span class="attribute-title">{{ 'EXPLORE.owner' | translate }}</span><br>
+                                <span *ngIf="owner != undefined"><strong>@{{owner.userName}}</strong></span><br>
+                                <span class="attribute-title">{{ 'EXPLORE.email' | translate }}</span><br>
+                                <span *ngIf="owner != undefined"><strong>{{owner.email}}</strong></span><br>
+
+                                <hr>
+
+                                <span class="attribute-title">{{ 'EXPLORE.created-on' | translate }}</span><br>
+                                <span class="date-style"><strong>{{program.creationDate}}</strong></span><br>
+
+                                <span class="attribute-title">{{ 'EXPLORE.program-name' | translate }}</span><br>
+                                <span><strong>{{program.programName}}</strong></span><br>
+                              </div>
+                              <div class="col-md-6">
+                                <span class="attribute-title">{{ 'EXPLORE.full-name' | translate }}</span><br>
+                                <span *ngIf="owner != undefined"><strong>{{owner.firstName}} {{owner.lastName}}</strong></span><br>
+                                <span class="attribute-title">{{ 'EXPLORE.user-type' | translate }}</span><br>
+                                <span *ngIf="owner != undefined" class="user-role"><strong>{{owner.role}}</strong></span><br>
+
+                                <hr>
+
+                                <span class="attribute-title">{{ 'EXPLORE.last-update' | translate }}</span><br>
+                                <span class="date-style"><strong>{{program.updateDate}}</strong></span><br>
+
+                                <span class="attribute-title">{{ 'EXPLORE.program-desc' | translate }}</span><br>
+                                <span class="program-desc"><strong>{{program.programDesc}}</strong></span>
+                              </div>
+                            </div>
+              
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">{{ 'COMMON.cancel' | translate }}</button>
+                            <button routerLink="/program/{{program.id}}" type="button" class="btn btn-success" data-dismiss="modal">{{ 'EXPLORE.go-to-program' | translate }}</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="section-title">
+          <span>{{ 'EXPLORE.search-users' | translate }}</span>
+        </div>
+        <div class="cool-border max-height">
+          <form class="form-inline">
+            <i class="fa fa-search" aria-hidden="true"></i>
+            <input class="form-control form-control-sm ml-2 w-75" type="text" placeholder="Search"
+              aria-label="Search" (input)="searchUsers($event.target.value)">
+          </form>
+          <div *ngFor="let user of foundUsers" class="member">
+            <div class="row">
+              <div class="col-md-9">
+                <span>{{user.firstName}} {{user.lastName}} (@{{user.userName}})</span><br>
+              </div>
+              <div class="col-md-3 align-right">
+                <button title="{{ 'GROUP.user-info' | translate }}" data-toggle="modal" [attr.data-target]="'#viewUser' + user.id" class="btn btn-info user-button"><i class="fa fa-info-circle"></i></button>
+              </div>
+              <!-- MODAL USER INFO -->
+              <div class="modal fade" id="viewUser{{user.id}}">
+                  <div class="modal-dialog">
+                      <div class="modal-content color-green-modal">
+                          <div class="modal-header">
+                              <h4 class="modal-title">{{ 'GROUP.user-info' | translate }}</h4>
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          </div>
+                          <div class="modal-body">
+
+                            <div class="row">
+                              <div class="col-md-6">
+                                <span class="attribute-title">{{ 'GROUP.username' | translate }}</span><br>
+                                <span><strong>@{{user.userName}}</strong></span><br>
+                                <span class="attribute-title">{{ 'GROUP.email' | translate }}</span><br>
+                                <span><strong>{{user.email}}</strong></span><br>
+                                <span class="attribute-title">{{ 'GROUP.member-since' | translate }}</span><br>
+                                <span class="date-style"><strong>{{user.signUpDate}}</strong></span>
+                              </div>
+                              <div class="col-md-6">
+                                <span class="attribute-title">{{ 'GROUP.full-name' | translate }}</span><br>
+                                <span><strong>{{user.firstName}} {{user.lastName}}</strong></span><br>
+                                <span class="attribute-title">{{ 'GROUP.user-type' | translate }}</span><br>
+                                <span><strong>{{user.role}}</strong></span>
+                              </div>
+                            </div>
+              
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">{{ 'COMMON.cancel' | translate }}</button>
+                            <button routerLink="/user/{{user.userName}}" type="button" class="btn btn-success" data-dismiss="modal">{{ 'EXPLORE.go-to-profile' | translate }}</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

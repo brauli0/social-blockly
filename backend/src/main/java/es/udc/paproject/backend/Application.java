@@ -1,0 +1,64 @@
+package es.udc.paproject.backend;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.MessageSource;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+
+import es.udc.paproject.backend.model.entities.ProgramDaoImpl;
+import es.udc.paproject.backend.model.entities.UserDaoSearchImpl;
+import es.udc.paproject.backend.model.entities.UsersGroupRelDaoImpl;
+
+@SpringBootApplication
+public class Application {
+
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
+
+    @Bean
+    public ProgramDaoImpl programDaoImpl() {
+    	return new ProgramDaoImpl();
+    }
+
+    @Bean
+    public UsersGroupRelDaoImpl usersGroupRelDaoImpl() {
+    	return new UsersGroupRelDaoImpl();
+    }
+
+    @Bean
+    public UserDaoSearchImpl userDaoSearchImpl() {
+    	return new UserDaoSearchImpl();
+    }
+
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+    	return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public MessageSource messageSource() {
+
+        ReloadableResourceBundleMessageSource bean = new ReloadableResourceBundleMessageSource();
+
+        bean.setBasename("classpath:messages");
+        bean.setDefaultEncoding("UTF-8");
+
+        return bean;
+    }
+
+    @Bean
+    public LocalValidatorFactoryBean validator() {
+
+        LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
+
+        bean.setValidationMessageSource(messageSource());
+
+        return bean;
+
+    }
+
+}

@@ -1,0 +1,167 @@
+.no-program-div {
+    text-align: center;
+    margin-top: 10%;
+}
+
+.no-program {
+    font-size: 17px;
+    color: #26801b;
+    font-weight: bold;
+}
+
+.go-back-button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 32px;
+    padding: 0px 5px;
+}
+
+.icon-20 {
+    font-size: 20px;
+}
+
+.comment-div {
+    margin: 20px 0px 20px 0px;
+}
+
+.title {
+    font-size: 23px;
+    color: #005200;
+}
+
+.new-comment {
+    margin-bottom: 10px;
+}
+
+.send-button-div {
+    text-align: right;
+    margin-top: 4px;
+}
+
+.edit-buttons {
+    text-align: right;
+}
+
+.margin-right-button {
+    margin-right: 10px;
+}
+
+.comment {
+    margin-bottom: 6px;
+}
+
+.comment-author {
+    color:#051b6f;
+    font-size: 15px;
+    display: inline;
+}
+
+.comment-text {
+    background-color: #f0ffed;
+    padding: 5px;
+    margin: 5px 0px 5px 0px;
+}
+
+.comment-date {
+    font-size: 11px;
+    color: black;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.btn-reply {
+    font-size: 12px;
+    padding: 2px 3px 2px 3px;
+}
+
+.btn-delete {
+    font-size: 15px;
+    padding: 0px 7px 0px 7px;
+    margin-left: 3px;
+}
+
+.reply-div {
+    margin: 5px 0px 0px 20px;
+}
+
+.reply {
+    border-bottom: 1px solid #cccccc;
+    margin-bottom: 5px;
+}
+
+.replies-title {
+    margin-left: 30px;
+    color: #005200;
+    font-size: 17px;
+}
+
+.color-green-modal {
+    background-color: #d8fbd7;
+}
+
+.no-comments-text {
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.rating-div {
+    margin: 20px 0px 20px 0px;
+}
+
+.rating-show {
+    margin: 15px 0px 30px 0px;
+}
+
+.custom-bar {
+    border: 1px solid green;
+    height: 2rem;
+    font-size: 25px;
+}
+
+.bar-text {
+    color: #0c15a0;
+}
+
+.votes {
+    font-size: 15px;
+}
+
+.more-custom {
+    border: 1px solid #007bff;
+    border-radius: 10px;
+}
+
+.attributes-div {
+    margin: 10px 0px 20px 0px;
+}
+
+.name-div {
+    text-align: right;
+    border-right: 1px solid #05a502;
+}
+
+.attribute-title {
+    color: green;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.private-lock {
+    position: absolute;
+    right: 15px;
+    color: red;
+    font-size: 25px;
+}
+
+.public-lock {
+    position: absolute;
+    right: 15px;
+    color: green;
+    font-size: 25px;
+}
+
+.owner {
+    position: absolute;
+}

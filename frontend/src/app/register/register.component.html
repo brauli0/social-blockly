@@ -1,0 +1,87 @@
+<h1>{{ 'REGISTER.register' | translate }}</h1>
+<div class="row">
+  <div class="offset-md-3 col-md-6 div-shadow">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="form-row">
+        <div class="input-group mb-3 col-md-6">
+          <div class="input-group-prepend">
+            <span class="input-group-text">{{ 'REGISTER.username' | translate }}</span>
+          </div>
+          <input type="text" class="form-control" id="username" placeholder="jack007" autofocus
+            formControlName="username" [ngClass]="{'is-invalid': submitted && form.username.errors }">
+          <div *ngIf="submitted && form.username.errors" class="invalid-feedback">
+            <div *ngIf="form.username.errors.required">{{ 'LOGIN.username-required' | translate }}</div>
+          </div>
+        </div>
+        <div class="input-group mb-3 col-md-6">
+          <div class="input-group-prepend">
+              <span class="input-group-text">{{ 'REGISTER.password' | translate }}</span>
+          </div>
+          <input type="password" class="form-control" placeholder="··········" formControlName="password"
+            [ngClass]="{'is-invalid': submitted && form.password.errors }">
+          <div *ngIf="submitted && form.password.errors" class="invalid-feedback">
+            <div *ngIf="form.password.errors.required">{{ 'LOGIN.password-required' | translate }}</div>
+            <div *ngIf="form.password.errors.minlength">{{ 'LOGIN.password-length' | translate }} {{minLengthPass}} {{ 'LOGIN.characters' | translate }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-group mb-3 col-md-6">
+          <div class="input-group-prepend">
+            <span class="input-group-text">{{ 'REGISTER.first-name' | translate }}</span>
+          </div>
+          <input type="text" class="form-control" formControlName="firstName" placeholder="Jack"
+            [ngClass]="{'is-invalid': submitted && form.firstName.errors }">
+          <div *ngIf="submitted && form.firstName.errors" class="invalid-feedback">
+            <div *ngIf="form.firstName.errors.required">{{ 'REGISTER.first-name-required' | translate }}</div>
+          </div>
+        </div>
+        <div class="input-group mb-3 col-md-6">
+          <div class="input-group-prepend">
+              <span class="input-group-text">{{ 'REGISTER.last-name' | translate }}</span>
+          </div>
+          <input type="text" class="form-control" formControlName="lastName" placeholder="Reacher"
+            [ngClass]="{'is-invalid': submitted && form.lastName.errors }">
+          <div *ngIf="submitted && form.lastName.errors" class="invalid-feedback">
+            <div *ngIf="form.lastName.errors.required">{{ 'REGISTER.last-name-required' | translate }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-group mb-3 col-md-6">
+          <div class="input-group-prepend">
+            <span class="input-group-text">{{ 'REGISTER.email' | translate }}</span>
+          </div>
+          <input type="email" class="form-control" placeholder="email@example.com" formControlName="email"
+            [ngClass]="{'is-invalid': submitted && form.email.errors }">
+          <div *ngIf="submitted && form.email.errors" class="invalid-feedback">
+            <div *ngIf="form.email.errors.required">{{ 'REGISTER.email-required' | translate }}</div>
+            <div *ngIf="form.email.errors.email">{{ 'REGISTER.email-invalid' | translate }}</div>
+          </div>
+        </div>
+        <div class="input-group mb-3 col-md-6">
+          <div class="input-group-prepend">
+            <span class="input-group-text">{{ 'REGISTER.role' | translate }}</span>
+          </div>
+          <select class="form-control" formControlName="roleInput">
+            <option *ngFor="let role of roles" [ngValue]="role">{{role}}</option>
+          </select>
+        </div>
+      </div>
+      
+      <!-- <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Address</span>
+        </div>
+        <input type="text" class="form-control" placeholder="Rúa Juan Flórez, nº 1234-5ºB, A Coruña" id="address" name="address">
+      </div> -->
+      <div class="align-center">
+        <button type="submit" class="cool-button">{{ 'REGISTER.sign-in' | translate }}</button>
+        <br>
+        <a routerLink="/login">{{ 'REGISTER.signed-in' | translate }}</a>
+      </div>
+    </form>
+  </div>
+</div>

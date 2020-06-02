@@ -1,0 +1,217 @@
+<div>
+  <div *ngIf="!gotanswer" class="no-exercise-div">
+    <span class="no-exercise">{{ 'EXERCISE.no-exercise' | translate }} <a routerLink="/mygroups">{{ 'GROUP.my-groups' | translate }}</a>.</span>
+  </div>
+  <div *ngIf="gotanswer">
+    <div class="offset-md-1 col-md-10">
+      <div class="row">
+        <div class="col-md-2 padding-top-13">
+          <button routerLink="/group/{{exercise.groupId}}" title="{{ 'COMMON.go-back' | translate }}" class="btn btn-success go-back-button"><i class="fa fa-arrow-left icon-20"></i> {{ 'COMMON.go-back' | translate }}</button>
+        </div>
+        <div class="col-md-8 padding-top-13 align-center">
+          <span class="title">EXERCISE</span>
+        </div>
+      </div>
+      <div class="offset-md-2 col-md-8">
+        <div class="row">
+          <div *ngIf="!iAmAdmin" class="col-md-12">
+            <div class="div-shadow">
+              <div class="statement-div">
+                <span class="attribute-title">{{ 'GROUP.statement' | translate }}</span><br>
+                <span>{{exercise.statementText}}</span>
+              </div>
+              <div class="row">
+                <div class="col-md-3">
+                  <span class="attribute-title">{{ 'GROUP.group' | translate }}</span><br>
+                  <span *ngIf="group != undefined" class="small"><strong>{{group.groupName}}</strong></span>
+                </div>
+                <div class="col-md-3">
+                  <span class="attribute-title">{{ 'EXERCISE.author' | translate }}</span><br>
+                  <span *ngIf="author != undefined" class="small"><strong>@{{author.userName}}</strong></span>
+                </div>
+                <div class="col-md-3">
+                  <span class="attribute-title">{{ 'EXERCISE.created-on' | translate }}</span><br>
+                  <span class="small"><strong>{{exercise.creationDateString}}</strong></span>
+                </div>
+                <div class="col-md-3">
+                  <span class="attribute-title">{{ 'EXERCISE.expires-on' | translate }}</span><br>
+                  <span class="small"><strong>{{exercise.expirationDateString}}</strong></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="iAmAdmin" class="col-md-11">
+            <div class="div-shadow">
+              <div class="statement-div">
+                <span class="attribute-title">{{ 'EXERCISE.statement' | translate }}</span><br>
+                <span>{{exercise.statementText}}</span>
+              </div>
+              <div class="row">
+                <div class="col-md-3">
+                  <span class="attribute-title">{{ 'EXERCISE.group' | translate }}</span><br>
+                  <span *ngIf="group != undefined" class="small"><strong>{{group.groupName}}</strong></span>
+                </div>
+                <div class="col-md-3">
+                  <span class="attribute-title">{{ 'EXERCISE.author' | translate }}</span><br>
+                  <span *ngIf="author != undefined" class="small"><strong>@{{author.userName}}</strong></span>
+                </div>
+                <div class="col-md-3">
+                  <span class="attribute-title">{{ 'EXERCISE.created-on' | translate }}</span><br>
+                  <span class="small"><strong>{{exercise.creationDateString}}</strong></span>
+                </div>
+                <div class="col-md-3">
+                  <span class="attribute-title">{{ 'EXERCISE.expires-on' | translate }}</span><br>
+                  <span class="small"><strong>{{exercise.expirationDateString}}</strong></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="iAmAdmin" class="col-md-1">
+            <button (click)="setModal(exercise.statementText)" data-toggle="modal" data-target="#updateExercise" class="btn btn-warning button-update"><i class="fa fa-pencil"></i></button>
+            <!-- MODAL UPDATE EXERCISE -->
+            <div class="modal fade" id="updateExercise">
+              <div class="modal-dialog">
+                  <div class="modal-content color-green-modal">
+                      <div class="modal-header">
+                        <h4 class="modal-title">{{ 'EXERCISE.update-exercise' | translate }}</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      </div>
+                      <div class="modal-body">
+
+                        <span>{{ 'EXERCISE.statement-required' | translate }}</span>
+                        <textarea rows="3" class="form-control" [formControl]="statementInput"></textarea>
+                        <br>
+                        <span>{{ 'EXERCISE.expiration-date' | translate }}</span><br>
+                        <div class="row">
+                          <div class="input-group col-md-4">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">{{ 'EXERCISE.year' | translate }}</span>
+                            </div>
+                            <input type="text" class="form-control" [formControl]="yearInput">
+                          </div>
+                          <div class="input-group col-md-4">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">{{ 'EXERCISE.month' | translate }}</span>
+                            </div>
+                            <input type="text" class="form-control" [formControl]="monthInput">
+                          </div>
+                          <div class="input-group col-md-4">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">{{ 'EXERCISE.day' | translate }}</span>
+                            </div>
+                            <input type="text" class="form-control" [formControl]="dayInput">
+                          </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                          <div class="input-group col-md-4">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">{{ 'EXERCISE.hour' | translate }}</span>
+                            </div>
+                            <input type="text" class="form-control" [formControl]="hourInput">
+                          </div>
+                          <div class="input-group col-md-4">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">{{ 'EXERCISE.minute' | translate }}</span>
+                            </div>
+                            <input type="text" class="form-control" [formControl]="minuteInput">
+                          </div>
+                          <div class="input-group col-md-4">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">{{ 'EXERCISE.second' | translate }}</span>
+                            </div>
+                            <input type="text" class="form-control" [formControl]="secondInput">
+                          </div>
+                        </div>
+                        <br>
+                        <div class="edit-buttons">
+                            <button type="button" class="btn btn-danger margin-right-button" data-dismiss="modal">{{ 'COMMON.cancel' | translate }}</button>
+                            <button type="button" class="btn btn-success" data-dismiss="modal" (click)="editExercise()">{{ 'COMMON.save' | translate }}</button>
+                        </div>
+
+                      </div>
+                  </div>
+              </div>
+            </div>
+            <button data-toggle="modal" data-target="#deleteExercise" class="btn btn-danger button-delete"><i class="fa fa-trash-o"></i></button>
+            <!-- MODAL DELETE EXERCISE -->
+            <div class="modal fade" id="deleteExercise">
+              <div class="modal-dialog">
+                <div class="modal-content color-green-modal">
+                  <div class="modal-header">
+                    <h4 class="modal-title">{{ 'EXERCISE.delete-exercise' | translate }}</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+                  <div class="modal-body">
+      
+                    <span *ngIf="group != undefined">{{ 'EXERCISE.confirm-delete' | translate }}</span>
+      
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">{{ 'COMMON.cancel' | translate }}</button>
+                    <button type="button" (click)="deleteExercise()" class="btn btn-success" data-dismiss="modal">{{ 'GROUP.delete' | translate }}</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="offset-md-1 col-md-10 margin-top-15">
+        <span class="solutions-title">{{ 'EXERCISE.proposed-solutions' | translate }}</span>
+        <button data-toggle="modal" data-target="#newSolution" class="btn btn-info btn-new-solution">{{ 'EXERCISE.new-solution' | translate }}</button>
+        <!-- MODAL NEW SOLUTION -->
+        <div class="modal fade" id="newSolution">
+          <div class="modal-dialog">
+            <div class="modal-content color-green-modal">
+              <div class="modal-header">
+                <h4 class="modal-title">{{ 'EXERCISE.new-solution' | translate }}</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <div class="modal-body">
+  
+                <span *ngIf="group != undefined">{{ 'EXERCISE.confirm-new-solution' | translate }}</span>
+  
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">{{ 'COMMON.cancel' | translate }}</button>
+                <button type="button" (click)="newSolution()" class="btn btn-success" data-dismiss="modal">{{ 'COMMON.ok' | translate }}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngFor="let program of pageShowingSolutions">
+          
+          <div routerLink="/program/{{program.id}}" class="program-div div-shadow cursor-pointer">
+            <div class="row">
+              <div class="col-md-3">
+                <span class="attribute-title">{{ 'PROGRAMS.name' | translate }}</span><br>
+                <span class="attribute"><strong>{{program.programName}}</strong></span>
+              </div>
+              <div class="col-md-5">
+                <span class="attribute-title">{{ 'PROGRAMS.description' | translate }}</span><br>
+                <span class="attribute">{{program.programDesc}}</span>
+              </div>
+              <div class="col-md-2">
+                <span class="attribute-title">{{ 'PROGRAMS.creation-date' | translate }}</span><br>
+                <span class="attribute-date">{{program.creationDate}}</span>
+              </div>
+              <div class="col-md-2">
+                <span class="attribute-title">{{ 'PROGRAMS.last-update' | translate }}</span><br>
+                <span class="attribute-date">{{program.updateDate}}</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    <!-- PAGINATION -->
+    <div *ngIf="solutions.length != 0" class="pagination-div">
+      <span>{{ 'COMMON.showing' | translate }} <strong>{{pageConfig.firstShown}}</strong> {{ 'COMMON.to' | translate }} <strong>{{pageConfig.lastShown}}</strong> {{ 'COMMON.of' | translate }} <strong>{{pageConfig.size}}</strong></span><br>
+      <button (click)="previousPage()" class="btn btn-success left-arrow"><i class="fa fa-caret-left"></i></button>
+      <button (click)="nextPage()" class="btn btn-success right-arrow"><i class="fa fa-caret-right"></i></button>
+    </div>
+    <!-- ---------- -->
+    </div>
+  </div>
+</div>

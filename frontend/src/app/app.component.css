@@ -1,0 +1,29 @@
+.bg-navbar {
+    background-color: #26801b;
+    box-shadow: 0px 2px 3px 1px grey;
+}
+
+body {
+    background-color: #28bd2530;
+}
+
+.menu {
+    background-color: #b7fbbc;
+    margin-top: 15%;
+}
+
+.color-green {
+    color: #055005;
+}
+
+.margin-right-9 {
+    margin-right: 9px;
+}
+
+.margin-right-2 {
+    margin-right: 2px;
+}
+
+.margin-right-3 {
+    margin-right: 3px;
+}

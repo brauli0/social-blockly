@@ -1,0 +1,55 @@
+/* @import '~highlight.js/styles/darcula.css'; */
+/* @import '~highlight.js/styles/monokai.css'; */
+@import '~highlight.js/styles/atom-one-dark.css';
+
+html {
+    background-color: #28bd2530;
+}
+
+.row {
+    margin-right: 0px !important;
+}
+
+.div-shadow {
+    border-radius: 5px;
+    box-shadow: 2px 2px 6px 0px #07800a94;
+    padding: 10px;
+}
+
+.cool-button {
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
+    padding: 3% 2%;
+    display: inline-block;
+    margin: 15px 30px;
+    font-weight: 700;
+    outline: none;
+    position: relative;
+    
+    background: #26801b;
+    color: #fff;
+    box-shadow: 0 9px #023c06;
+    transition: none;
+
+    border-radius: 50%;
+}
+
+.cool-button:hover {
+    box-shadow: 0 6px #023c06;
+    top: 3px;
+}
+
+.cool-button:active {
+    box-shadow: 0 0 #023c06;
+	top: 9px;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.full-width {
+    width: 100%;
+}

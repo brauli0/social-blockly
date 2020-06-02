@@ -1,0 +1,114 @@
+.no-program-div {
+    text-align: center;
+    margin-top: 10%;
+}
+
+.no-program {
+    font-size: 17px;
+    color: #26801b;
+    font-weight: bold;
+}
+
+.attribute-title {
+    color: green;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.go-back-button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 32px;
+    padding: 0px 5px;
+}
+
+.visibility-title {
+    float: left;
+    margin-top: 6px;
+}
+
+.visibility-select {
+    width: 35%;
+    margin-left: 10px;
+    float: left;
+}
+
+.color-green {
+    color: #055005;
+}
+
+.visibility-div {
+    padding-top: 40px;
+}
+
+.private-lock {
+    margin-left: 15px;
+    margin-top: 6px;
+    color: red;
+    font-size: 22px;
+}
+
+.public-lock {
+    margin-left: 15px;
+    margin-top: 6px;
+    color: green;
+    font-size: 22px;
+}
+
+.shared-lock {
+    margin-left: 15px;
+    margin-top: 6px;
+    color: blue;
+    font-size: 22px;
+}
+
+.question-icon {
+    color: blue;
+    margin-left: 10px;
+    font-size: 18px;
+}
+
+.user-button {
+    height: 25px;
+    padding: 0px 5px;
+}
+
+.user {
+    border: 1px solid #1eb51e;
+    padding: 2px;
+    margin: 7px 0px;
+    background: #c2fbc2;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.title {
+    color: #005200;
+    font-size: 20px;
+}
+
+.color-green-modal {
+    background-color: #d8fbd7;
+}
+
+.attribute-title {
+    color: green;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.date-style {
+    font-size: 12px;
+}
+
+.margin-right-1 {
+    margin-right: 1px;
+}
+
+.max-height {
+    height: 350px;
+    overflow: auto;
+    padding: 5px;
+}

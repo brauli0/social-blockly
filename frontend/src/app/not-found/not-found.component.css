@@ -1,0 +1,15 @@
+.not-found-div {
+    text-align: center;
+    margin-top: 5%;
+}
+
+.not-found {
+    font-size: 17px;
+    color: #26801b;
+    font-weight: bold;
+}
+
+.error-code {
+    color: #26801b;
+    font-size: 100px;
+}

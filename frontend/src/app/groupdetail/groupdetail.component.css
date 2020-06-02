@@ -1,0 +1,254 @@
+.no-group-div {
+    text-align: center;
+    margin-top: 10%;
+}
+
+.no-group {
+    font-size: 17px;
+    color: #26801b;
+    font-weight: bold;
+}
+
+.group-name {
+    color: #26801b;
+    text-align:center;
+    font-size: 27px;
+    margin-right: 20px;
+}
+
+.padding-top-13 {
+    padding-top: 13px;
+}
+
+.button-change-name {
+    color: white;
+    height: 40px;
+    padding: 0px 13px;
+    margin-right: 10px;
+}
+
+.color-green-modal {
+    background-color: #d8fbd7;
+}
+
+.edit-buttons {
+    text-align: right;
+}
+
+.margin-right-button {
+    margin-right: 10px;
+}
+
+.go-back-button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 32px;
+    padding: 0px 5px;
+}
+
+.icon-20 {
+    font-size: 20px;
+}
+
+.cool-border {
+    border-radius: 1%;
+    border: 1px solid green;
+    padding: 10px;
+}
+
+.member {
+    border: 1px solid #1eb51e;
+    padding: 2px;
+    margin: 7px 0px;
+    background: #c2fbc2;
+}
+
+.user-button {
+    height: 25px;
+    padding: 0px 5px;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.align-center {
+    text-align:center;
+}
+
+.group-title {
+    font-size: 23px;
+    color: #005200;
+}
+
+.margin-bottom-20 {
+    margin-bottom: 20px;
+}
+
+.attribute-title {
+    color: green;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.margin-right-5 {
+    margin-right: 5px;
+}
+
+.date-style {
+    font-size: 12px;
+}
+
+.chat-div {
+    height: 430px;
+    background: #ddffd9;
+    border: 2px inset #98ec98;
+}
+
+.input-chat {
+    position: absolute;
+    bottom: 2px;
+    width: 81%;
+}
+
+.send-button {
+    position: absolute;
+    bottom: 2px;
+    right: 17px;
+    width: 37px;
+    color: #0d6d0d;
+    background: #caeaca;
+}
+
+.send-button:hover {
+    background: #97f197;
+}
+
+.send-button:active {
+    background: #66ec66;
+}
+
+.messages-div {
+    height: 93%;
+    padding: 3px;
+    overflow: auto;
+}
+
+.own-message-div {
+    text-align: right;
+    margin-top: 7px;
+}
+
+.other-message-div {
+    text-align: left;
+    margin-top: 7px;
+}
+
+.own-message-text {
+    background-color: coral;
+    display: inline-block;
+    padding: 5px;
+    border-radius: 0px 15px;
+    font-size: 15px;
+    max-width: 75%;
+}
+  
+.other-message-text {
+    background-color: lightblue;
+    display: inline-block;
+    padding: 3px;
+    border-radius: 15px 0px;
+    font-size: 15px;
+    max-width: 75%;
+}
+
+.message-date {
+    font-size: 11px;
+    margin-top: -3px;
+}
+
+.username-chat {
+    font-style: italic;
+    color: #139606;
+}
+
+.no-messages {
+    text-align: center;
+    margin-top: 20%;
+    color: green;
+}
+
+.no-connection {
+    text-align: right;
+    color: red;
+    font-size: 12px;
+}
+
+.no-connection-text {
+    position: relative;
+    bottom: -13px;
+}
+
+.manage-button {
+    position: absolute;
+    right: 18px;
+    top: 5px;
+    padding: 0px 5px;
+}
+
+.chat-enable {
+    position: absolute;
+    left: 75px;
+    top: 5px;
+    padding: 0px 5px;
+}
+
+.disabled-span {
+    color: red;
+    margin-left: 10px;
+    font-size: 12px;
+}
+
+.exercise-div {
+    margin-bottom: 7px;
+}
+
+.exercise-div:hover {
+    background-color: #b1deb1;
+}
+
+.attribute-title {
+    color: green;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.margin-dates {
+    margin-top: -5px;
+}
+
+.no-exercises {
+    font-size: 13px;
+    padding-top: 20px;
+}
+
+.create-button {
+    position: absolute;
+    right: 18px;
+    top: 5px;
+    padding: 0px 5px;
+}
+
+.custom-control {
+    width: 400px;
+    margin: auto;
+}
+
+.max-height {
+    height: 430px;
+    overflow: auto;
+}
+
+.padding-5 {
+    padding: 5px;
+}

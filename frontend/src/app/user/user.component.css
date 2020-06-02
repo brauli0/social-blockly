@@ -1,0 +1,88 @@
+.user-info {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.title {
+    font-size: 27px;
+    color: #005200;
+}
+
+.top-div {
+    margin-top: 5px;
+    font-size: 12px;
+}
+
+.role-color {
+    color: #26801b;
+}
+
+.title-section {
+    color: #005200;
+    font-size: 20px;
+}
+
+.div-shadow-custom {
+    border-radius: 2%;
+    box-shadow: 2px 2px 6px 0px #07800a94;
+    padding: 4px 10px;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.div-shadow-custom:hover {
+    background-color: #b1deb1;
+}
+
+.overflow {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.no-user-div {
+    text-align: center;
+    margin-top: 10%;
+}
+
+.no-user {
+    font-size: 17px;
+    color: #26801b;
+    font-weight: bold;
+}
+
+.no-data {
+    font-size: 14px;
+    padding-top: 20px;
+}
+
+.go-back-button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 32px;
+    padding: 0px 5px;
+}
+
+.align-left {
+    text-align: left;
+}
+
+.title-div {
+    text-align: left;
+    padding-left: 14%;
+}
+
+.max-height {
+    height: 350px;
+    overflow: auto;
+}
+
+.padding-5 {
+    padding: 5px;
+}
+
+/* Fix misalignments */
+.row {
+    margin-left: 0px;
+}

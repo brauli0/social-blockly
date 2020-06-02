@@ -1,0 +1,100 @@
+.blockly-div {
+    height: 550px;
+    margin: auto;
+}
+
+.code {
+    border-radius: 5px;
+    max-height: 250px;
+}
+
+.output {
+    border-radius: 5px;
+    height: 155px;
+    overflow: auto;
+    background-color: #000000;
+    color: #2ace15;
+    padding: 7px;
+}
+
+.padding-code {
+    padding: 1px 0px;
+}
+
+.clear-button {
+    bottom: 0px;
+    left: 90px;
+    position: absolute;
+}
+
+.undo-button {
+    bottom: 0px;
+    left: 0px;
+    color: white;
+    position: absolute;
+}
+
+.redo-button {
+    bottom: 0px;
+    left: 45px;
+    position: absolute;
+}
+
+.clear-output {
+    cursor: pointer;
+    background-color: #626962;
+    color: #00ff00;
+    padding: 3px;
+    border-radius: 5px;
+}
+
+.save-button {
+    bottom: 0px;
+    left: 138px;
+    position: absolute;
+}
+
+.run-button {
+    border: none;
+    border-radius: 50%;
+    background-color: #26801b;
+    padding: 10px 19px;
+    font-size: 22px;
+    display: inline-block;
+    color: #fff;
+    box-shadow: 1px 3px 8px 2px #023c06;
+    transition: none;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+}
+
+.run-button:hover {
+    background-color: #2f9c21;
+}
+
+.run-button:active {
+    background-color: #1e6615;
+    box-shadow: 1px 3px 8px 5px #023c06;
+}
+
+.padding-blockly {
+    padding: 5px;
+}
+
+.hide {
+    display: none;
+}
+
+.text-align-right {
+    text-align: right;
+}
+
+.not-saved {
+    color: red;
+    font-size: 12px;
+    font-weight: bold;
+    position: absolute;
+    right: 110px;
+    bottom: 20px;
+}

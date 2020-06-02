@@ -1,0 +1,67 @@
+<h1>{{ 'PROFILE.profile' | translate }}</h1>
+<div class="row">
+  <div class="offset-md-4 col-md-4 profile-div div-shadow">
+    <div class="member-since">
+      <span class="role-color"><strong>{{role}}</strong></span><br>
+      <span>{{ 'PROFILE.member-since' | translate }}: <strong>{{signUpDate}}</strong></span>
+    </div>
+    <div class="row">
+      <div class="col-md-6 text-align-left">
+        <span class="attribute-title">{{ 'PROFILE.username' | translate }}</span>
+        <h4><strong>{{username}}</strong></h4>
+      </div>
+      <div class="col-md-6">
+        <button data-toggle="modal" data-target="#updatePassword" class="btn btn-warning">{{ 'PROFILE.change-pass' | translate }}</button>
+        <div class="modal fade" id="updatePassword">
+          <div class="modal-dialog">
+            <div class="modal-content color-green-modal">
+              <div class="modal-header">
+                <h4 class="modal-title">{{ 'PROFILE.change-pass' | translate }}</h4>
+                <button #btnClose type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <div class="modal-body">
+                <app-change-password></app-change-password>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 text-align-left">
+        <span class="attribute-title">{{ 'PROFILE.first-name-uppercase' | translate }}</span>
+        <h5 *ngIf="!editingFirstName"><strong>{{user.firstName}}</strong></h5>
+        <input *ngIf="editingFirstName" type="text" class="form-control custom-input" [formControl]="firstNameInput">
+      </div>
+      <div class="col-md-6">
+        <button *ngIf="!editingFirstName" (click)="editFirstName()" class="btn btn-success">{{ 'COMMON.update' | translate }}</button>
+        <button *ngIf="editingFirstName" (click)="stopEditingFirstName()" class="btn btn-danger cancel-btn">{{ 'COMMON.cancel' | translate }}</button>
+        <button *ngIf="editingFirstName" (click)="updateFirstName()" class="btn btn-success">{{ 'COMMON.save' | translate }}</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 text-align-left">
+        <span class="attribute-title">{{ 'PROFILE.last-name-uppercase' | translate }}</span>
+        <h5 *ngIf="!editingLastName"><strong>{{user.lastName}}</strong></h5>
+        <input *ngIf="editingLastName" type="text" class="form-control custom-input" [formControl]="lastNameInput">
+      </div>
+      <div class="col-md-6">
+        <button *ngIf="!editingLastName" (click)="editLastName()" class="btn btn-success">{{ 'COMMON.update' | translate }}</button>
+        <button *ngIf="editingLastName" (click)="stopEditingLastName()" class="btn btn-danger cancel-btn">{{ 'COMMON.cancel' | translate }}</button>
+        <button *ngIf="editingLastName" (click)="updateLastName()" class="btn btn-success">{{ 'COMMON.save' | translate }}</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 text-align-left">
+        <span class="attribute-title">{{ 'PROFILE.email-uppercase' | translate }}</span>
+        <h5 *ngIf="!editingEmail"><strong>{{user.email}}</strong></h5>
+        <input *ngIf="editingEmail" type="text" class="form-control custom-input" [formControl]="emailInput">
+      </div>
+      <div class="col-md-6">
+        <button *ngIf="!editingEmail" (click)="editEmail()" class="btn btn-success">{{ 'COMMON.update' | translate }}</button>
+        <button *ngIf="editingEmail" (click)="stopEditingEmail()" class="btn btn-danger cancel-btn">{{ 'COMMON.cancel' | translate }}</button>
+        <button *ngIf="editingEmail" (click)="updateEmail()" class="btn btn-success">{{ 'COMMON.save' | translate }}</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,165 @@
+<div>
+  <div class="row">
+    <div class="offset-md-1 col-md-10">
+      <button *ngIf="gotanswer" routerLink="/myprograms" title="{{ 'COMMON.go-back' | translate }}" class="btn btn-success go-back-button"><i class="fa fa-arrow-left icon-20"></i> {{ 'EDITOR.my-programs-capital' | translate }}</button> 
+      <div *ngIf="gotanswer" class="row">
+        <div class="offset-md-2 col-md-8">
+          <div class="row">
+            <div class="col-md-6">
+              <span class="attribute-title">{{ 'EDITOR.name' | translate }}</span><br>
+              <span>{{program.programName}}</span>
+            </div>
+            <div class="col-md-6">
+              <span class="attribute-title">{{ 'EDITOR.description' | translate }}</span><br>
+              <span>{{program.programDesc}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="gotanswer" class="row">
+        <div class="col-md-4 visibility-div">
+          <span class="color-green visibility-title">{{ 'PROGRAMS.visibility' | translate }}</span>
+          <select (ngModelChange)="onSelectChange($event)" class="form-control visibility-select" [formControl]="visibilitySelect">
+            <option>Private</option>
+            <option>Shared</option>
+            <option>Public</option>
+          </select>
+          <i title="{{ 'PROGRAMS.private-program' | translate }}" *ngIf="program.visibility == 'Private'" class="fa fa-lock private-lock"></i>
+          <i title="{{ 'PROGRAMS.shared-program' | translate }}" *ngIf="program.visibility == 'Shared'" class="fa fa-lock shared-lock"></i>
+          <i title="{{ 'PERMISSIONS.shared-explanation' | translate }}" *ngIf="visibilitySelect.value == 'Shared' && program.visibility == 'Private'" class="fa fa-question-circle question-icon"></i>
+          <i title="{{ 'PROGRAMS.public-program' | translate }}" *ngIf="program.visibility == 'Public'" class="fa fa-unlock-alt public-lock"></i>
+        </div>
+        <div class="col-md-4 visibility-div">
+          <div *ngIf="visibilitySelect.value == 'Shared'">
+            <form class="form-inline">
+              <i class="fa fa-search" aria-hidden="true"></i>
+              <input class="form-control form-control-sm ml-2 w-75" type="text" placeholder="Search"
+                aria-label="Search" (input)="searchUsers($event.target.value)">
+            </form>
+            <div *ngFor="let user of foundUsers" class="user">
+              <div class="row">
+                <div class="col-md-9">
+                  <span>{{user.firstName}} {{user.lastName}} (@{{user.userName}})</span><br>
+                </div>
+                <div class="col-md-3 align-right">
+                  <button title="{{ 'GROUP.add-user' | translate }}" data-toggle="modal" [attr.data-target]="'#addUser' + user.id" class="btn btn-success user-button"><i class="fa fa-arrow-right icon-20"></i></button>
+                </div>
+                <!-- MODAL ADD USER -->
+                <div class="modal fade" id="addUser{{user.id}}">
+                  <div class="modal-dialog">
+                      <div class="modal-content color-green-modal">
+                        <div class="modal-header">
+                            <h4 class="modal-title">{{ 'PERMISSIONS.share-program' | translate }}</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+            
+                            <span>{{ 'PERMISSIONS.confirmation-title' | translate }} <strong>@{{user.userName}}</strong>?</span><br><br>
+                            <div class="row">
+                              <div class="col-md-6">
+                                <span class="attribute-title">{{ 'GROUP.username' | translate }}</span><br>
+                                <span><strong>@{{user.userName}}</strong></span><br>
+                                <span class="attribute-title">{{ 'GROUP.email' | translate }}</span><br>
+                                <span><strong>{{user.email}}</strong></span><br>
+                                <span class="attribute-title">{{ 'GROUP.member-since' | translate }}</span><br>
+                                <span class="date-style"><strong>{{user.signUpDate}}</strong></span>
+                              </div>
+                              <div class="col-md-6">
+                                <span class="attribute-title">{{ 'GROUP.full-name' | translate }}</span><br>
+                                <span><strong>{{user.firstName}} {{user.lastName}}</strong></span><br>
+                                <span class="attribute-title">{{ 'GROUP.user-type' | translate }}</span><br>
+                                <span><strong>{{user.role}}</strong></span>
+                              </div>
+                            </div>
+            
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-danger" data-dismiss="modal">{{ 'COMMON.cancel' | translate }}</button>
+                          <button type="button" (click)="shareProgram(user.id)" class="btn btn-success" data-dismiss="modal">{{ 'PERMISSIONS.share' | translate }}</button>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 visibility-div">
+          <span *ngIf="visibilitySelect.value == 'Shared'" class="title">{{ 'PERMISSIONS.shared-list' | translate }}</span>
+          <div *ngIf="visibilitySelect.value == 'Shared'">
+            <div class="max-height">
+              <div *ngFor="let user of program.sharedUsers" class="user">
+                <div class="row">
+                  <div class="col-md-9">
+                    <span>{{user.firstName}} {{user.lastName}} (@{{user.userName}})</span><br>
+                  </div>
+                  <div class="col-md-3 align-right">
+                    <button title="{{ 'GROUP.user-info' | translate }}" data-toggle="modal" [attr.data-target]="'#viewUser' + user.id" class="btn btn-info user-button margin-right-1"><i class="fa fa-info-circle icon-20"></i></button>
+                    <button title="{{ 'GROUP.remove-user' | translate }}" data-toggle="modal" [attr.data-target]="'#removeUser' + user.id" class="btn btn-danger user-button"><i class="fa fa-trash-o icon-20"></i></button>
+                  </div>
+                  <!-- MODAL VIEW USER-->
+                  <div class="modal fade" id="viewUser{{user.id}}">
+                    <div class="modal-dialog">
+                        <div class="modal-content color-green-modal">
+                            <div class="modal-header">
+                                <h4 class="modal-title">{{ 'GROUP.user-info' | translate }}</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="row">
+                                  <div class="col-md-6">
+                                    <span class="attribute-title">{{ 'GROUP.username' | translate }}</span><br>
+                                    <span><strong>@{{user.userName}}</strong></span><br>
+                                    <span class="attribute-title">{{ 'GROUP.email' | translate }}</span><br>
+                                    <span><strong>{{user.email}}</strong></span><br>
+                                    <span class="attribute-title">{{ 'GROUP.member-since' | translate }}</span><br>
+                                    <span class="date-style"><strong>{{user.signUpDate}}</strong></span>
+                                  </div>
+                                  <div class="col-md-6">
+                                    <span class="attribute-title">{{ 'GROUP.full-name' | translate }}</span><br>
+                                    <span><strong>{{user.firstName}} {{user.lastName}}</strong></span><br>
+                                    <span class="attribute-title">{{ 'GROUP.user-type' | translate }}</span><br>
+                                    <span><strong>{{user.role}}</strong></span>
+                                  </div>
+                                </div>
+                
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-success" data-dismiss="modal">{{ 'COMMON.ok' | translate }}</button>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                  <!-- MODAL REMOVE USER-->
+                  <div class="modal fade" id="removeUser{{user.id}}">
+                    <div class="modal-dialog">
+                        <div class="modal-content color-green-modal">
+                            <div class="modal-header">
+                              <h4 class="modal-title">{{ 'GROUP.remove-user' | translate }}</h4>
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                
+                              <span>Stop sharing this program with <strong>@{{user.userName}}</strong>?</span>
+                
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-danger" data-dismiss="modal">{{ 'COMMON.cancel' | translate }}</button>
+                              <button type="button" (click)="stopSharing(user.id)" class="btn btn-success" data-dismiss="modal">{{ 'GROUP.remove' | translate }}</button>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!gotanswer" class="no-program-div">
+    <span class="no-program">{{ 'EDITOR.no-program' | translate }}<a routerLink="/myprograms">{{ 'EDITOR.my-programs' | translate }}</a>.</span>
+  </div>
+</div>

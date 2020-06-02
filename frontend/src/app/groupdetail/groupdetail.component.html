@@ -1,0 +1,312 @@
+<div>
+  <div *ngIf="!gotanswer" class="no-group-div">
+    <span class="no-group">{{ 'GROUP.no-group' | translate }} <a routerLink="/mygroups">{{ 'GROUP.my-groups' | translate }}</a>.</span>
+  </div>
+  <div *ngIf="gotanswer" class="row">
+    <div class="offset-md-1 col-md-10">
+      <div class="row margin-bottom-20">
+        <div class="col-md-2">
+          <button routerLink="/mygroups" title="{{ 'COMMON.go-back' | translate }}" class="btn btn-success go-back-button"><i class="fa fa-arrow-left icon-20"></i> {{ 'GROUP.my-groups-capital' | translate }}</button>
+        </div>
+        <div class="col-md-8 padding-top-13 align-center">
+          <span *ngIf="group != undefined && !editingGroupName" class="group-name">{{group.groupName}}</span>
+          <input *ngIf="editingGroupName" type="text" class="form-control custom-control" [formControl]="groupNameInput">
+        </div>
+        <div class="col-md-2 padding-top-13 align-right">
+          <button *ngIf="iAmAdmin && !editingGroupName" (click)="editGroupName()" title="{{ 'GROUP.change-name' | translate }}" class="btn btn-warning button-change-name"><i class="fa fa-pencil"></i></button>
+          <button *ngIf="iAmAdmin && editingGroupName" (click)="save()" title="{{ 'COMMON.save' | translate }}" class="btn btn-success button-change-name"><i class="fa fa-floppy-o"></i></button>
+          <button *ngIf="iAmAdmin" data-toggle="modal" data-target="#deleteGroup" title="{{ 'GROUP.delete-group' | translate }}" class="btn btn-danger button-change-name"><i class="fa fa-trash-o"></i></button>
+        </div>
+      </div>
+      <!-- MODAL DELETE GROUP -->
+      <div class="modal fade" id="deleteGroup">
+        <div class="modal-dialog">
+            <div class="modal-content color-green-modal">
+                <div class="modal-header">
+                    <h4 class="modal-title">{{ 'GROUP.delete-group' | translate }}</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+    
+                    <span *ngIf="group != undefined">{{ 'GROUP.confirm-delete' | translate }} "{{group.groupName}}"?</span>
+    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">{{ 'COMMON.cancel' | translate }}</button>
+                    <button type="button" (click)="deleteGroup()" class="btn btn-success" data-dismiss="modal">{{ 'GROUP.delete' | translate }}</button>
+                </div>
+            </div>
+        </div>
+      </div>
+
+      <div class="row">
+
+        <div class="col-md-4">
+          <span class="group-title">{{ 'GROUP.exercises' | translate }}</span>
+          <button *ngIf="iAmAdmin" (click)="setNewExerciseModal()" data-toggle="modal" data-target="#createExercise" class="btn btn-info create-button">{{ 'GROUP.new-exercise' | translate }}</button>
+          <!-- MODAL CREATE EXERCISE -->
+          <div class="modal fade" id="createExercise">
+            <div class="modal-dialog">
+              <div class="modal-content color-green-modal">
+                  <div class="modal-header">
+                    <h4 class="modal-title">{{ 'EXERCISE.create-exercise' | translate }}</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+                  <div class="modal-body">
+
+                    <span>{{ 'EXERCISE.statement' | translate }}</span>
+                    <textarea rows="3" class="form-control" placeholder="{{ 'GROUP.new-exercise-placeholder' | translate }}" [formControl]="statementInput"></textarea>
+                    <br>
+                    <span>{{ 'EXERCISE.blocks' | translate }}</span><br>
+                    <div class="row">
+                      <div class="col-md-3">
+                        <input type="checkbox" [formControl]="logicCheckbox">Logic<br>
+                        <input type="checkbox" [formControl]="listsCheckbox">Lists
+                      </div>
+                      <div class="col-md-3">
+                        <input type="checkbox" [formControl]="loopsCheckbox">Loops<br>
+                        <input type="checkbox" [formControl]="colorsCheckbox">Colors
+                      </div>
+                      <div class="col-md-3">
+                        <input type="checkbox" [formControl]="mathCheckbox">Math<br>
+                        <input type="checkbox" [formControl]="variablesCheckbox">Variables
+                      </div>
+                      <div class="col-md-3">
+                        <input type="checkbox" [formControl]="textCheckbox">Text<br>
+                        <input type="checkbox" [formControl]="functionsCheckbox">Functions
+                      </div>
+                    </div>
+                    <br>
+                    <span>{{ 'EXERCISE.expiration-date' | translate }}</span><br>
+                    <div class="row">
+                      <div class="input-group col-md-4">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">{{ 'EXERCISE.year' | translate }}</span>
+                        </div>
+                        <input type="text" class="form-control" [formControl]="yearInput">
+                      </div>
+                      <div class="input-group col-md-4">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">{{ 'EXERCISE.month' | translate }}</span>
+                        </div>
+                        <input type="text" class="form-control" [formControl]="monthInput">
+                      </div>
+                      <div class="input-group col-md-4">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">{{ 'EXERCISE.day' | translate }}</span>
+                        </div>
+                        <input type="text" class="form-control" [formControl]="dayInput">
+                      </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                      <div class="input-group col-md-4">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">{{ 'EXERCISE.hour' | translate }}</span>
+                        </div>
+                        <input type="text" class="form-control" [formControl]="hourInput">
+                      </div>
+                      <div class="input-group col-md-4">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">{{ 'EXERCISE.minute' | translate }}</span>
+                        </div>
+                        <input type="text" class="form-control" [formControl]="minuteInput">
+                      </div>
+                      <div class="input-group col-md-4">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">{{ 'EXERCISE.second' | translate }}</span>
+                        </div>
+                        <input type="text" class="form-control" [formControl]="secondInput">
+                      </div>
+                    </div>
+                    <br>
+                    <div class="edit-buttons">
+                      <button type="button" class="btn btn-danger margin-right-button" data-dismiss="modal">{{ 'COMMON.cancel' | translate }}</button>
+                      <button type="button" class="btn btn-success" data-dismiss="modal" (click)="saveExercise()">{{ 'COMMON.save' | translate }}</button>
+                    </div>
+
+                  </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="exercises.length == 0" class="no-exercises">
+            <span>Nothing to show.</span>
+          </div>
+          <div *ngIf="exercises.length != 0" class="max-height padding-5">
+            <div *ngFor="let exercise of exercises">
+              <div routerLink="/exercise/{{exercise.id}}" class="exercise-div div-shadow cursor-pointer">
+                <span>{{exercise.statementText}}</span><br>
+                <div class="row">
+                  <div class="col-md-6">
+                    <span class="attribute-title">CREATED ON</span>
+                  </div>
+                  <div class="col-md-6">
+                    <span class="attribute-title">EXPIRES ON</span>
+                  </div>
+                </div>
+                <div class="row margin-dates">
+                  <div class="col-md-6">
+                    <span class="date-style"><strong>{{exercise.creationDate}}</strong></span>
+                  </div>
+                  <div class="col-md-6">
+                    <span class="date-style"><strong>{{exercise.expirationDate}}</strong></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-md-4">
+          <div class="row">
+            <div class="col-md-4">
+              <span class="group-title">{{ 'GROUP.chat' | translate }}</span>
+              <button *ngIf="iAmAdmin && !group.chatEnable" (click)="enableChat()" class="btn btn-success chat-enable">{{ 'GROUP.enable' | translate }}</button>
+              <button *ngIf="iAmAdmin && group.chatEnable" (click)="disableChat()" class="btn btn-danger chat-enable">{{ 'GROUP.disable' | translate }}</button>
+              <span *ngIf="!iAmAdmin && !group.chatEnable" class="disabled-span">{{ 'GROUP.disabled' | translate }}</span>
+            </div>
+            <div class="col-md-8 no-connection">
+              <span *ngIf="stopCheckingForNewMessages" class="no-connection-text">{{ 'GROUP.no-connection-span' | translate }}</span>
+            </div>
+          </div>
+          <div class="chat-div">
+            <div id="scrolldiv" class="messages-div">
+              <div *ngIf="!noMessages">
+                <div *ngFor="let message of messages">
+                    <!-- OWN MESSAGE -->
+                  <div *ngIf="message.userId == myUserId" class="own-message-div">
+                    <div class="own-message-text">
+                      <span><strong>{{message.messageText}}</strong></span>
+                      <br>
+                      <div class="message-date">
+                        <span>{{message.messageDate}}</span>
+                      </div>
+                    </div>
+                  </div>
+    
+                  <!-- OTHER MESSAGE -->
+                  <div *ngIf="message.userId != myUserId" class="other-message-div">
+                    <div class="other-message-text">
+                        <span><strong>@<span routerLink="/user/{{message.userName}}" class="username-chat cursor-pointer">{{message.userName}}</span>: {{message.messageText}}</strong></span>
+                      <br>
+                      <div class="message-date">
+                        <span>{{message.messageDate}}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="noMessages">
+                <div class="no-messages">
+                  <span>{{ 'GROUP.no-messages' | translate }}</span>
+                </div>
+              </div>
+
+            </div>
+            <input (keydown.enter)="sendMessage()" type="text" class="input-chat" [formControl]="inputMessage">
+            <button (click)="sendMessage()" class="send-button"><i class="fa fa-paper-plane-o"></i></button>
+          </div>
+        </div>
+
+
+        <div class="col-md-4">
+          <span class="group-title">{{ 'GROUP.members' | translate }}</span>
+          <button *ngIf="iAmAdmin" routerLink="/groupmanagement/{{group.id}}" class="btn btn-info manage-button">{{ 'GROUP.manage' | translate }}</button>
+          <button *ngIf="!iAmAdmin" data-toggle="modal" data-target="#exitGroup" class="btn btn-danger manage-button">{{ 'GROUP.exit-group' | translate }}</button>
+          <!-- MODAL EXIT GROUP-->
+          <div class="modal fade" id="exitGroup">
+            <div class="modal-dialog">
+              <div class="modal-content color-green-modal">
+                <div class="modal-header">
+                    <h4 class="modal-title">{{ 'GROUP.exit-group' | translate }}</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                  <span *ngIf="group != undefined">{{ 'GROUP.exit-group-confirmation' | translate }}</span>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">{{ 'COMMON.cancel' | translate }}</button>
+                  <button type="button" (click)="exitGroup()" class="btn btn-success" data-dismiss="modal">{{ 'GROUP.exit' | translate }}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="cool-border max-height">
+            <form class="form-inline">
+              <i class="fa fa-search" aria-hidden="true"></i>
+              <input class="form-control form-control-sm ml-2 w-75" type="text" placeholder="Search"
+                aria-label="Search" (input)="searchMembers($event.target.value)">
+            </form>
+            <div *ngFor="let user of showingUsers" class="member">
+              <div class="row">
+                <div class="col-md-8">
+                  <span>{{user.firstName}} {{user.lastName}}</span>
+                </div>
+                <div class="col-md-4 align-right">
+                  <button title="{{ 'GROUP.user-info' | translate }}" data-toggle="modal" [attr.data-target]="'#viewUser' + user.id" class="btn btn-info user-button"><i class="fa fa-info-circle icon-20"></i></button>
+                </div>
+                <!-- MODAL VIEW USER-->
+                <div class="modal fade" id="viewUser{{user.id}}">
+                  <div class="modal-dialog">
+                      <div class="modal-content color-green-modal">
+                        <div class="modal-header">
+                            <h4 class="modal-title">{{ 'GROUP.user-info' | translate }}</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+
+                          <div class="row">
+                            <div class="col-md-6">
+                              <span class="attribute-title">{{ 'GROUP.username' | translate }}</span><br>
+                              <span><strong>@{{user.userName}}</strong></span><br>
+                              <span class="attribute-title">{{ 'GROUP.email' | translate }}</span><br>
+                              <span><strong>{{user.email}}</strong></span><br>
+                              <span class="attribute-title">{{ 'GROUP.member-since' | translate }}</span><br>
+                              <span class="date-style"><strong>{{user.signUpDate}}</strong></span>
+                            </div>
+                            <div class="col-md-6">
+                              <span class="attribute-title">{{ 'GROUP.full-name' | translate }}</span><br>
+                              <span><strong>{{user.firstName}} {{user.lastName}}</strong></span><br>
+                              <span class="attribute-title">{{ 'GROUP.user-type' | translate }}</span><br>
+                              <span><strong>{{user.role}}</strong></span>
+                            </div>
+                          </div>
+            
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-success" data-dismiss="modal">{{ 'COMMON.ok' | translate }}</button>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+                <!-- MODAL REMOVE USER-->
+                <div class="modal fade" id="removeUser{{user.id}}">
+                  <div class="modal-dialog">
+                      <div class="modal-content color-green-modal">
+                        <div class="modal-header">
+                            <h4 class="modal-title">{{ 'GROUP.remove-user' | translate }}</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+            
+                          <span *ngIf="group != undefined">{{ 'GROUP.confirm-remove' | translate }} "<strong>{{user.userName}}</strong>" {{ 'GROUP.from' | translate }} "{{group.groupName}}"?</span>
+            
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-danger" data-dismiss="modal">{{ 'COMMON.cancel' | translate }}</button>
+                          <button type="button" (click)="removeMember(user.id, user.userName)" class="btn btn-success" data-dismiss="modal">{{ 'GROUP.remove' | translate }}</button>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
